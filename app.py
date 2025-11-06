@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template
+import os
+
 import joblib
 import pandas as pd
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -70,4 +72,8 @@ def predict():
     return render_template('index.html', prediction = prediction)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+   
+
+    port = int(os.environ.get("PORT", 10000))  # Render provides PORT env var
+    app.run(host="0.0.0.0", port=port, debug=True)
